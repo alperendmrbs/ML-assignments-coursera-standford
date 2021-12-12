@@ -21,9 +21,26 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+X = [ones(m, 1) X];
 
 
+for i=1:m
+A = zeros(size(Theta1,1),1);    
+    for j=1:size(Theta1,1)
+        
+        A(j) = sigmoid(X(i,:)*transpose(Theta1(j,:)));
+        
+    end
+A = [ones(1,1) transpose(A)];
 
+[M,I] = max(sigmoid(A*transpose(Theta2)));
+
+if I == 10
+    p(i) = 0;
+end
+
+p(i) = I;   
+end    
 
 
 
@@ -31,5 +48,5 @@ p = zeros(size(X, 1), 1);
 
 % =========================================================================
 
-
 end
+

@@ -38,12 +38,20 @@ grad = zeros(size(theta));
 
 
 
+%Legacy
+for i=1:m
+   %J = J + ((-y(i))*log(sigmoid(transpose(theta)*transpose(X(i,:)))))-((1-y(i))*log(1-(sigmoid(transpose(theta)*transpose(X(i,:))))));  
+end
 
+%Trying better vectorization
 
+J = sum(-y.*log(sigmoid(X*theta))-(1-y).*log(1-sigmoid(X*theta)))/m + (lambda/(2*m))*sum(theta(2:end).^2);
 
-
-
-
+%For grad
+grad = (1/m).*(transpose(X)*(sigmoid(X*theta)-y));
+temp = theta;
+temp(1) = 0;
+grad = grad + (lambda/m).*temp;
 
 % =============================================================
 

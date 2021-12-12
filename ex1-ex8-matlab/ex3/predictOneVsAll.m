@@ -28,12 +28,19 @@ X = [ones(m, 1) X];
 %       max element, for more information see 'help max'. If your examples 
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
-%       
+%
+for i=1:m
+    
+[M,I] = max(sigmoid(X(i,:)*transpose(all_theta)));    
+if I == 10
+    p(i) = 0;
+end
+p(i) = I;   
+end
 
 
 
-
-
+%p = max(X*transpose(all_theta), [],5000);
 
 
 % =========================================================================
